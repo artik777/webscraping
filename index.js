@@ -29,11 +29,9 @@ async function scrapePage(i) {
     rows = rows.concat(newRows);
     i++;
   }
-
-  console.log('total rows length', rows.length);
+  const nRows = rows.filter((job) => job.title.toLowerCase().includes('javascript')).sort((a, b) => (new Date(b.date) - new Date(a.date)))
+  console.log('total rows length', nRows);
   const sheet = new Sheet();
   await sheet.load();
-  await sheet.addRows(rows)
-
-
+  await sheet.addRows(nRows)
 })()
